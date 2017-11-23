@@ -1,0 +1,21 @@
+{
+  "name": "varal-container",
+  "version": "1.0.0",
+  "description": "An IoC Container for Javascript",
+  "main": "index.js",
+  "scripts": {},
+  "author": "dmpty",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "repository": "varaljs/varal-container",
+  "keywords": [
+    "varal",
+    "IoC"
+  ],
+  "files": [
+    "README.md",
+    "index.js"
+  ]
+}
