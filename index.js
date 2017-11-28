@@ -23,21 +23,18 @@ class Container {
             if (this.binds[abstract])
                 return this.binds[abstract](this, ...args);
         }
-        return makeClass(this, abstract, ...args);
-
+        return Container.make(abstract, ...args);
     }
 
     static make(abstract, ...args) {
-        return makeClass(this, abstract, ...args);
+        if (typeof abstract.constructor === 'function')
+            if (typeof abstract.injector === 'function') {
+                const dependencies = abstract.injector(this);
+                return new abstract(...dependencies, ...args);
+            } else
+                return new abstract(...args);
     }
 
 }
-
-const makeClass = (ctn, abstract, ...args) => {
-    if (typeof abstract.injector === 'function' && typeof abstract.constructor === 'function') {
-        const dependencies = abstract.injector(ctn);
-        return new abstract(...dependencies, ...args);
-    }
-};
 
 exports = module.exports = Container;
