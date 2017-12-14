@@ -1,5 +1,3 @@
-'use strict';
-
 class Container {
 
     constructor() {
@@ -10,10 +8,8 @@ class Container {
     bind(abstract, concrete) {
         if (typeof concrete === 'function')
             this.binds[abstract] = concrete;
-    }
-
-    singleton(abstract, instance) {
-        this.instances[abstract] = instance;
+        else if (typeof concrete === 'string')
+            this.instances[abstract] = concrete;
     }
 
     make(abstract, ...args) {
@@ -22,12 +18,7 @@ class Container {
                 return this.instances[abstract];
             if (this.binds[abstract])
                 return this.binds[abstract](this, ...args);
-        }
-        return Container.make(abstract, ...args);
-    }
-
-    static make(abstract, ...args) {
-        if (typeof abstract.constructor === 'function')
+        } else if (typeof abstract.constructor === 'function')
             if (typeof abstract.injector === 'function') {
                 const dependencies = abstract.injector(this);
                 return new abstract(...dependencies, ...args);
