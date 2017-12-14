@@ -8,7 +8,7 @@ class Container {
     bind(abstract, concrete) {
         if (typeof concrete === 'function')
             this.binds[abstract] = concrete;
-        else if (typeof concrete === 'string')
+        else
             this.instances[abstract] = concrete;
     }
 

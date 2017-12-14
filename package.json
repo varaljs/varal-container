@@ -1,6 +1,6 @@
 {
   "name": "varal-container",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An IoC Container for Javascript",
   "main": "index.js",
   "scripts": {},
