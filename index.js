@@ -1,8 +1,8 @@
 class Container {
 
     constructor() {
-        this.binds = [];
-        this.instances = [];
+        this.binds = {};
+        this.instances = {};
     }
 
     bind(abstract, concrete) {
