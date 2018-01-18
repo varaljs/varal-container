@@ -21,7 +21,15 @@ class Container {
         } else if (typeof abstract.constructor === 'function')
             if (typeof abstract.injector === 'function') {
                 const dependencies = abstract.injector(this);
-                return new abstract(...dependencies, ...args);
+                if (Array.isArray(dependencies))
+                    return new abstract(...dependencies, ...args);
+                else if (dependencies instanceof Map) {
+                    const instance = new abstract(...args);
+                    for (let [key, dependency] of dependencies)
+                        instance[key] = dependency;
+                    return instance;
+                } else
+                    throw new Error('Invalid injector')
             } else
                 return new abstract(...args);
     }
