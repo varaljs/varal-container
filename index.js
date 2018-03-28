@@ -12,6 +12,13 @@ class Container {
             this.instances[abstract] = concrete;
     }
 
+    singleton(abstract, concrete) {
+        if (typeof concrete === 'function')
+            this.instances[abstract] = concrete(this);
+        else
+            this.instances[abstract] = concrete;
+    }
+
     make(abstract, ...args) {
         if (typeof abstract === 'string') {
             if (this.instances[abstract])
